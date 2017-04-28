@@ -50,7 +50,7 @@ You can either deploy rabbitmq with the management console:
    ```
    oc get route rabbitmq
    ```
-   Go to: https://<route> to log in
+   Go to: https://\<route\> to log in
 
 ## Run the test helloworld client
 
