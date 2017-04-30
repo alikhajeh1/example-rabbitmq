@@ -59,7 +59,7 @@ This just tests you can connect and prints out some Hello World messages.
 1. Deploy the test application using the service domain name of the rabbitmq service.
    ```
    oc new-app aliscott/rabbitmq-helloworld \
-     --env RABBITMQ_URI=amqp://<user>:<password>@<service>.<project>.svc.cluster.local
+     --env RABBITMQ_URI=amqp://<user>:<password>@<service>
    ```
 2. Check it is working by tailing the logs:
    ```

@@ -11,7 +11,7 @@ conn.start
 ch = conn.create_channel
 
 # declare a queue
-q  = ch.queue("test1")
+q  = ch.queue("test1", durable: true)
 
 i = 1
 while true
