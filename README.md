@@ -1,56 +1,6 @@
 ## Deploying RabbitMQ
 
-1. Create a new project
-   ```
-   oc new-project rabbitmq-test
-   ```
-
-2. Deploy rabbitmq
-You can either deploy rabbitmq with the management console:
-   ```
-   oc new-app rabbitmq:3-management --name rabbitmq \
-     --env RABBITMQ_DEFAULT_USER=<user> \
-     --env RABBITMQ_DEFAULT_PASS=<password>
-   ```
-   Or without the management console:
-   ```
-   oc new-app rabbitmq:3 \
-     --env RABBITMQ_DEFAULT_USER=<user> \
-     --env RABBITMQ_DEFAULT_PASS=<password>
-   ```
-
-3. Create a PVC for the database:
-   ```
-   oc create -f - <<EOF
-     apiVersion: "v1"
-     kind: "PersistentVolumeClaim"
-     metadata:
-       name: "rabbitmq"
-     spec:
-       accessModes:
-         - "ReadWriteOnce"
-       resources:
-         requests:
-           storage: "2Gi"
-   EOF
-   ```
-
-4. Attach the PVC to the rabbitmq deployment:
-   ```
-   oc volume dc/rabbitmq --remove --name rabbitmq-volume-1
-   oc volume dc/rabbitmq --add --name rabbitmq-volume-1 --type persistentVolumeClaim --claim-name rabbitmq --mount-path /var/lib/rabbitmq
-   ```
-
-5. If using the management version you can expose the management service:
-   ```
-   oc expose svc/rabbitmq --port=15672
-   oc patch route/rabbitmq -p '{"spec":{"tls":{"termination":"edge","insecureEdgeTerminationPolicy":"Redirect"}}}'
-   ```
-   Get the route name:
-   ```
-   oc get route rabbitmq
-   ```
-   Go to: https://\<route\> to log in
+Follow the [guide in the AbarCloud docs](https://docs.abarcloud.com/additional-services/rabbitmq.html) to deploy RabbitMQ on AbarCloud.
 
 ## Run the test helloworld client
 
